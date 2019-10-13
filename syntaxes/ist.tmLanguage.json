@@ -1,0 +1,48 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "IST",
+	"patterns": [
+		{
+			"include": "#action"
+		}
+	],
+	"repository": {
+		"action": {
+			"patterns": [
+				{ "include": "#comment" },
+				{ "include": "#branch" },
+				{ "include": "#emotion-dialog" },
+				{ "include": "#non-emotion-dialog" },
+				{ "include": "#command" }
+			]
+		},
+		"comment": {
+			"name": "comment.line.ist",
+			"match": "#.*"
+		},
+		"branch": {
+			"name": "keyword.control.branch.ist",
+			"match": "-.*"
+		},
+		"emotion-dialog": {
+			"match": "(.*)(@.*)((:|：).*)",
+			"captures": {
+				"1": { "name": "support.type.character.ist" },
+				"2": { "name": "support.function.emotion.ist" },
+				"3": { "name": "variable.parameter.dialog.ist" }
+			}
+		},
+		"non-emotion-dialog": {
+			"match": "(.*)((:|：).*)",
+			"captures": {
+				"1": { "name": "support.type.ist" },
+				"2": { "name": "variable.parameter.dialog.ist" }
+			}
+		},
+		"command": {
+			"name": "keyword.command.ist",
+			"match": ">.*"
+		}
+	},
+	"scopeName": "source.ist"
+}

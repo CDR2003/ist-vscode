@@ -1,0 +1,25 @@
+{
+    "name": "ist",
+    "displayName": "IST Language Service",
+    "description": "The IST Language Service for Visual Studio Code",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.39.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ist",
+            "aliases": ["IST", "ist"],
+            "extensions": [".ist"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ist",
+            "scopeName": "source.ist",
+            "path": "./syntaxes/ist.tmLanguage.json"
+        }]
+    }
+}
