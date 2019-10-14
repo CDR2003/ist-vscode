@@ -9,17 +9,47 @@
     "categories": [
         "Programming Languages"
     ],
+	"main": "./out/extension.js",
+	"activationEvents": [
+		"onLanguage:ist"
+	],
     "contributes": {
-        "languages": [{
-            "id": "ist",
-            "aliases": ["IST", "ist"],
-            "extensions": [".ist"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "ist",
-            "scopeName": "source.ist",
-            "path": "./syntaxes/ist.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "ist",
+                "aliases": [
+                    "IST",
+                    "ist"
+                ],
+                "extensions": [
+                    ".ist"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ist",
+                "scopeName": "source.ist",
+                "path": "./syntaxes/ist.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.12.21",
+        "@types/vscode": "^1.39.0",
+        "glob": "^7.1.4",
+        "mocha": "^6.1.4",
+        "typescript": "^3.3.1",
+        "tslint": "^5.12.1",
+        "vscode-test": "^1.2.0"
     }
 }
