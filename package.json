@@ -2,7 +2,8 @@
     "name": "ist",
     "displayName": "IST Language Service",
     "description": "The IST Language Service for Visual Studio Code",
-    "version": "0.0.1",
+	"version": "0.1.0",
+	"publisher": "thin-panda",
     "engines": {
         "vscode": "^1.39.0"
     },

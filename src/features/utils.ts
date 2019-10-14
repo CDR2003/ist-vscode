@@ -90,4 +90,8 @@ export default class IstUtils {
 		}
 		return false;
 	}
+
+	public static getBranchText(line: string): string {
+		return line.trim().substr(1).trim();
+	}
 }
