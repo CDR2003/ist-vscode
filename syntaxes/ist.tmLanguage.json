@@ -18,14 +18,14 @@
 		},
 		"comment": {
 			"name": "comment.line.ist",
-			"match": "#.*"
+			"match": "^\\s*#.*"
 		},
 		"branch": {
 			"name": "keyword.control.branch.ist",
-			"match": "-.*"
+			"match": "^\\s*-.*"
 		},
 		"emotion-dialog": {
-			"match": "(.*)(@.*)((:|：).*)",
+			"match": "^\\s*(.*)(@.*)((:|：).*)",
 			"captures": {
 				"1": { "name": "support.type.character.ist" },
 				"2": { "name": "support.function.emotion.ist" },
@@ -33,7 +33,7 @@
 			}
 		},
 		"non-emotion-dialog": {
-			"match": "(.*)((:|：).*)",
+			"match": "^\\s*(.*)((:|：).*)",
 			"captures": {
 				"1": { "name": "support.type.ist" },
 				"2": { "name": "variable.parameter.dialog.ist" }
@@ -41,7 +41,7 @@
 		},
 		"command": {
 			"name": "keyword.command.ist",
-			"match": ">.*"
+			"match": "^\\s*>.*"
 		}
 	},
 	"scopeName": "source.ist"
