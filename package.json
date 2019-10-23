@@ -2,7 +2,7 @@
     "name": "ist",
     "displayName": "IST Language Service",
     "description": "The IST Language Service for Visual Studio Code",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"publisher": "thin-panda",
     "engines": {
         "vscode": "^1.39.0"
@@ -34,7 +34,32 @@
                 "scopeName": "source.ist",
                 "path": "./syntaxes/ist.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration":{
+            "title": "IST",
+            "properties": {
+                "ist.optionCharacterLimit": {
+                    "type": "integer",
+                    "default": 70,
+                    "description": "The character limit for branch options."
+                },
+                "ist.narrativeCharacterLimit": {
+                    "type": "integer",
+                    "default": 120,
+                    "description": "The character limit for narratives."
+                },
+                "ist.dialogCharacterLimit": {
+                    "type": "integer",
+                    "default": 120,
+                    "description": "The character limit for dialogs."
+                },
+                "ist.monologueCharacterLimit": {
+                    "type": "integer",
+                    "default": 120,
+                    "description": "The character limit for monologues."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

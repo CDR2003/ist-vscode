@@ -1,7 +1,7 @@
 import { COMMENT_PREFIX, COMMAND_PREFIX, BRANCH_PREFIX, DIALOG_PREFIXES, MONOLOGUE_PREFIXES, MONOLOGUE_SUFFIXES, EMOTION_PREFIX } from "./consts";
 import IstCompilerError from "./compilerError";
 import { IstStmt, IstBranchOptionStmt, IstNarrativeStmt, IstDialogStmt, IstBranchStmt } from "./ast";
-import { TextDocument } from "vscode";
+import { TextDocument, workspace, WorkspaceConfiguration } from "vscode";
 
 export default class IstCompiler {
     public stmts: IstStmt[] = [];
@@ -131,10 +131,21 @@ export default class IstCompiler {
 
     private compileBranchOption(trimmed: string, line: number) {
         const text = trimmed.substring(1).trim();
+
+        const limit = workspace.getConfiguration('ist').get<number>('optionCharacterLimit');
+        if (limit !== undefined && text.length > limit) {
+            this.addError('Branch option exceeds character limit: ' + text.length + ", which should not be greater than " + limit, line);
+        }
+
         this.addStmt(new IstBranchOptionStmt(line, text));
     }
 
     private compileNarrative(trimmed: string, line: number) {
+        const limit = workspace.getConfiguration('ist').get<number>('narrativeCharacterLimit');
+        if (limit !== undefined && trimmed.length > limit) {
+            this.addError('Narrative exceeds character limit: ' + trimmed.length + ", which should not be greater than " + limit, line);
+        }
+
         this.addStmt(new IstNarrativeStmt(line, trimmed));
     }
 
@@ -167,6 +178,18 @@ export default class IstCompiler {
                 // Character@Emotion: Dialog
                 stmt.character = characterAndEmotion.substring(0, emotionIndex).trim();
                 stmt.emotion = characterAndEmotion.substring(emotionIndex + 1).trim();
+            }
+        }
+
+        if (stmt.monologue) {
+            const limit = workspace.getConfiguration('ist').get<number>('monologueCharacterLimit');
+            if (limit !== undefined && stmt.text.length > limit) {
+                this.addError('Monologue exceeds character limit: ' + trimmed.length + ", which should not be greater than " + limit, line);
+            }
+        } else {
+            const limit = workspace.getConfiguration('ist').get<number>('dialogCharacterLimit');
+            if (limit !== undefined && stmt.text.length > limit) {
+                this.addError('Dialog exceeds character limit: ' + trimmed.length + ", which should not be greater than " + limit, line);
             }
         }
 
